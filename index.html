@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Daily Chest</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#EDEDEF;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;touch-action:none}
+.abs{position:absolute}
+.app{position:relative;width:390px;height:844px;flex:none;transform-origin:center;background:#fff;overflow:hidden;user-select:none;-webkit-user-select:none;color:#121212}
+.bg{position:absolute;inset:-80px;filter:blur(90px);opacity:.22;pointer-events:none}
+.bg i{position:absolute;border-radius:50%}
+.coin-s{border-radius:50%;background:url('https://i.ibb.co/9mNm5Lpx/photo-2026-10-27-15-43-37.jpg') center/100% 100% no-repeat;position:relative;flex:none}
+.coin-s::after{content:"";position:absolute;inset:20%;border-radius:50%;border:1.5px solid transparent}
+.big{background:url('https://i.ibb.co/9mNm5Lpx/photo-2026-10-27-15-43-37.jpg') center/100% 100% no-repeat;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:transparent;position:relative}
+.big::before{content:"";position:absolute;inset:11%;border-radius:50%;border:5px solid transparent}
+.top{top:20px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between}
+.pill{display:flex;align-items:center;gap:8px;background:#F1F1F2;border-radius:99px;padding:6px 14px 6px 6px;font-weight:800;font-size:17px}
+.card{top:72px;left:16px;right:16px;aspect-ratio:975/503;border-radius:12px;background:linear-gradient(135deg,#231C24,#17151A 55%,#1D161D);box-shadow:0 0 0 1.5px rgba(150,20,130,.75),0 0 16px rgba(150,20,130,.45);overflow:hidden;color:#fff}
+.stage{top:290px;left:0;right:0;height:340px;display:flex;align-items:center;justify-content:center}
+#coin{width:200px;height:200px;font-size:92px;cursor:pointer;box-shadow:0 22px 40px rgba(227,154,18,.38)}
+.float{position:absolute;font-weight:800;font-size:40px;color:#FE2C55;-webkit-text-stroke:2.5px #121212;paint-order:stroke fill;white-space:nowrap;pointer-events:none;animation:floatUp .85s ease-out forwards}
+.band{position:absolute;top:0;bottom:0;width:18px;background:#FFC93C;border:0 solid #121212;border-width:0 4px}
+.hide{display:none!important}
+#notif{inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:0 32px 120px;opacity:0;transform:scale(1.08);transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .35s;z-index:5;pointer-events:none}
+#notif.on{opacity:1;transform:none}
+@keyframes press{35%{transform:scale(.9)}70%{transform:scale(1.05)}}
+@keyframes floatUp{0%{opacity:0;transform:translate(-50%,0) scale(.6)}20%{opacity:1;transform:translate(-50%,-20px) scale(1.15)}100%{opacity:0;transform:translate(-50%,-110px)}}
+@keyframes ring{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+@keyframes idle{50%{transform:translateY(-8px)}}
+@keyframes chestIn{0%{transform:scale(.3) translateY(80px);opacity:0}}
+@keyframes shake{20%{transform:rotate(-5deg)}40%{transform:rotate(5deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(3deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes plusIn{0%{opacity:0;transform:translateY(20px) scale(.5)}60%{opacity:1;transform:translateY(-6px) scale(1.15)}}
+@keyframes burst{0%{transform:translate(0,0) scale(.4);opacity:0}15%{opacity:1}100%{transform:translate(var(--x),var(--y));opacity:0}}
+@keyframes blob{0%,100%{transform:none}33%{transform:translate(var(--a),var(--b)) scale(1.2)}66%{transform:translate(var(--c),var(--d)) scale(.9)}}
+@keyframes up{from{opacity:0;transform:translateY(30px) scale(.9)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="bg">
+    <i style="left:-40px;top:0;width:340px;height:340px;background:#25F4EE;--a:120px;--b:180px;--c:-40px;--d:320px;animation:blob 22s ease-in-out infinite"></i>
+    <i style="right:-40px;top:120px;width:300px;height:300px;background:#FE2C55;--a:-120px;--b:140px;--c:40px;--d:60px;animation:blob 26s ease-in-out infinite"></i>
+    <i style="left:-20px;top:460px;width:320px;height:320px;background:#FE2C55;--a:120px;--b:-180px;--c:60px;--d:-300px;animation:blob 28s ease-in-out infinite"></i>
+    <i style="right:-60px;bottom:0;width:360px;height:360px;background:#25F4EE;--a:-140px;--b:-160px;--c:60px;--d:-300px;animation:blob 24s ease-in-out infinite"></i>
+    <i style="left:120px;top:300px;width:260px;height:260px;background:#FF6FD8;--a:-120px;--b:140px;--c:80px;--d:-60px;animation:blob 30s ease-in-out infinite"></i>
+  </div>
+
+  <div class="abs top">
+    <b style="font-size:20px;letter-spacing:-.3px">Daily Chest</b>
+    <div class="pill"><span class="coin-s" style="width:26px;height:26px"></span><span class="bal">500</span></div>
+  </div>
+
+  <div class="abs card">
+    <div class="abs" style="inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.02) 0 2px,transparent 2px 8px)"></div>
+    <div class="abs" style="right:-2%;top:-30%;font-size:280px;line-height:1;color:rgba(255,255,255,.08)">♪</div>
+    <span class="abs" style="left:4%;top:9%;font-size:19px;font-weight:500;opacity:.88">Coins</span>
+    <div class="abs" style="left:4%;top:27%;display:flex;align-items:center;gap:10px">
+      <span class="coin-s" style="width:34px;height:34px"></span>
+      <b id="tapped" style="font-size:38px;letter-spacing:-1px;line-height:1">0</b>
+    </div>
+    <div class="abs" style="left:1%;right:0;top:57%;height:1px;background:rgba(255,255,255,.22)"></div>
+    <span class="abs" style="right:3%;bottom:8%;font-size:16px;font-weight:500;opacity:.7">View ›</span>
+  </div>
+
+  <div class="abs stage" id="coinStage">
+    <div style="position:relative;animation:idle 2.4s ease-in-out infinite">
+      <div id="ring" class="abs" style="inset:-6px;border-radius:50%;border:3px solid #25F4EE;animation:ring 1.4s ease-out infinite;pointer-events:none"></div>
+      <div id="coin" class="big">$</div>
+      <div id="floats" class="abs" style="inset:0;pointer-events:none"></div>
+    </div>
+  </div>
+
+  <div class="abs stage hide" id="chestStage">
+    <div class="abs open hide" style="width:520px;height:520px;left:50%;top:50%;margin:-260px 0 0 -260px;background:repeating-conic-gradient(rgba(255,201,60,.38) 0 9deg,transparent 9deg 24deg);-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%);animation:spin 14s linear infinite,fadeIn .5s both"></div>
+    <div id="chest" style="position:relative;width:230px;height:210px;transform-origin:50% 100%">
+      <div class="abs open hide" style="left:30px;right:30px;top:40px;height:90px;border-radius:50%;background:radial-gradient(ellipse,#FFF3B0,rgba(255,201,60,.8) 40%,transparent 72%)"></div>
+      <div class="abs" style="left:0;right:0;bottom:0;height:128px;background:linear-gradient(#FE2C55,#C9113B);border:5px solid #121212;border-radius:12px 12px 24px 24px;overflow:hidden">
+        <div class="abs" style="left:0;right:0;top:0;height:16px;background:#FFC93C;border-bottom:4px solid #121212"></div>
+        <div class="band" style="left:26px"></div><div class="band" style="right:26px"></div>
+      </div>
+      <div id="lid" class="abs" style="left:0;top:14px;width:230px;height:86px;transform-origin:14px 100%;transition:transform .55s cubic-bezier(.3,1.7,.5,1)">
+        <div class="abs" style="inset:0;background:linear-gradient(#FF5A7A,#FE2C55);border:5px solid #121212;border-radius:110px 110px 12px 12px/80px 80px 12px 12px;overflow:hidden">
+          <div class="band" style="left:21px"></div><div class="band" style="right:21px"></div>
+          <div class="abs" style="left:52px;top:14px;width:60px;height:10px;border-radius:8px;background:rgba(255,255,255,.35)"></div>
+        </div>
+      </div>
+      <div id="lock" class="abs" style="left:50%;top:76px;width:46px;height:54px;margin-left:-23px;background:#FFC93C;border:5px solid #121212;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform .4s">
+        <div style="width:12px;height:18px;background:radial-gradient(circle at 50% 6px,#121212 6px,transparent 6.5px),linear-gradient(#121212,#121212) 3px 6px/6px 12px no-repeat"></div>
+      </div>
+      <div id="burst" class="abs" style="left:50%;top:70px"></div>
+    </div>
+    <div class="abs open hide reward" style="bottom:-6px;left:0;right:0;text-align:center;font-weight:800;font-size:64px;letter-spacing:-2px;color:#FE2C55;-webkit-text-stroke:3px #121212;paint-order:stroke fill;animation:plusIn .6s .25s cubic-bezier(.3,1.6,.5,1) both"></div>
+  </div>
+
+  <div id="hint" class="abs" style="bottom:58px;left:0;right:0;text-align:center;font-weight:800;font-size:19px">Tap the coin!</div>
+
+  <div id="notif" class="abs">
+    <div class="big" style="width:132px;height:132px;font-size:56px;box-shadow:0 18px 36px rgba(227,154,18,.35)">$</div>
+    <div style="text-align:center">
+      <div style="font-weight:800;font-size:15px;letter-spacing:1.5px;color:#FE2C55">CHEST REWARD</div>
+      <div style="font-weight:600;font-size:16px;color:#5C5D63;margin-top:6px">+<span class="rw"></span> coins added to your balance</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-weight:700;font-size:14px;color:#8A8B91">Balance</div>
+      <div class="bal" style="font-weight:800;font-size:76px;line-height:1;letter-spacing:-2.5px;font-variant-numeric:tabular-nums">500</div>
+    </div>
+    <div style="width:220px;height:6px;background:#F1F1F2;border-radius:6px;overflow:hidden"><div id="bar" style="height:100%;width:0;background:linear-gradient(90deg,#25F4EE,#FE2C55)"></div></div>
+  </div>
+
+  <canvas id="fx" class="abs" style="inset:0;width:100%;height:100%;pointer-events:none;z-index:6"></canvas>
+
+  <div id="congrats" class="abs hide" style="inset:0;z-index:7;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 20px 44px;background:linear-gradient(rgba(255,255,255,0) 40%,rgba(255,255,255,.92) 68%);animation:fadeIn .4s both">
+    <div style="width:100%;text-align:center;animation:up .6s cubic-bezier(.3,1.4,.5,1) both">
+      <div style="font-weight:800;font-size:40px;letter-spacing:-1.2px;line-height:1">Congratulations!</div>
+      <div style="font-weight:600;font-size:16px;color:#5C5D63;margin-top:10px">You earned <span class="rw"></span> coins from the chest</div>
+      <button onclick="location.reload()" style="margin-top:24px;width:100%;height:56px;border:0;border-radius:16px;background:#FE2C55;color:#fff;font:800 17px 'Plus Jakarta Sans',sans-serif;cursor:pointer;box-shadow:0 10px 24px rgba(254,44,85,.35)">Play again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TAPS = 10, MIN = 15000, MAX = 40000;
+const fit = () => document.querySelector('.app').style.transform = `scale(${Math.min(innerWidth / 390, innerHeight / 844, 1)})`;
+fit(); addEventListener('resize', fit);
+const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+const fmt = n => n.toLocaleString('en-US');
+const rnd = (a, b) => a + Math.random() * (b - a);
+let count = 0, tapped = 0, balance = 500, reward = 0, busy = false;
+
+const setBal = v => $$('.bal').forEach(e => e.textContent = fmt(v));
+
+$('#coin').onclick = () => {
+  if (busy) return;
+  const v = Math.floor(rnd(100, 201));
+  count++; tapped += v;
+  $('#tapped').textContent = fmt(tapped);
+  $('#ring')?.remove();
+  const c = $('#coin'); c.style.animation = 'none'; c.offsetWidth; c.style.animation = 'press .28s ease-out';
+  const f = document.createElement('div');
+  f.className = 'float'; f.textContent = '+' + v;
+  f.style.left = `calc(50% + ${rnd(-70, 70)}px)`; f.style.top = 10 + rnd(0, 30) + 'px';
+  $('#floats').append(f); setTimeout(() => f.remove(), 900);
+  const left = TAPS - count;
+  $('#hint').textContent = left === 1 ? 'One more!' : left === 2 ? 'Almost there!' : 'Keep tapping!';
+  if (count >= TAPS) { busy = true; $('#hint').textContent = 'Chest unlocked!'; setTimeout(showChest, 700); }
+};
+
+function showChest() {
+  reward = Math.floor(rnd(MIN, MAX + 1));
+  $$('.rw').forEach(e => e.textContent = fmt(reward));
+  $('.reward').textContent = '+' + fmt(reward);
+  $('#coinStage').classList.add('hide');
+  $('#chestStage').classList.remove('hide');
+  $('#chest').style.animation = 'chestIn .55s cubic-bezier(.3,1.5,.5,1) both, shake .45s .75s ease-in-out 2';
+  $('#hint').textContent = 'Opening chest…';
+  setTimeout(openChest, 1700);
+}
+
+function openChest() {
+  $('#hint').textContent = '';
+  $$('.open').forEach(e => e.classList.remove('hide'));
+  $('#lid').style.transform = 'translateY(-34px) rotate(-30deg)';
+  $('#lock').style.transform = 'translateY(-4px) rotate(-8deg)';
+  [[-120,-150,34],[120,-160,30],[-60,-210,36],[70,-220,28],[-150,-60,26],[150,-70,26]].forEach(([x, y, s], i) => {
+    const b = document.createElement('span');
+    b.className = 'coin-s abs';
+    b.style.cssText += `width:${s}px;height:${s}px;margin:-${s/2}px;--x:${x}px;--y:${y}px;animation:burst 1s ${i*.03}s ease-out both`;
+    $('#burst').append(b);
+  });
+  setTimeout(countUp, 1200);
+}
+
+function countUp() {
+  $('#notif').classList.add('on');
+  const from = balance, to = balance + reward, t0 = performance.now();
+  (function step(now) {
+    const t = Math.min(1, (now - t0) / 2000), e = 1 - (1 - t) ** 3;
+    setBal(Math.round(from + (to - from) * e));
+    $('#bar').style.width = t * 100 + '%';
+    if (t < 1) return requestAnimationFrame(step);
+    balance = to;
+    setTimeout(() => { $('#congrats').classList.remove('hide'); confetti(); }, 450);
+  })(t0);
+}
+
+function confetti() {
+  const cv = $('#fx'), { width: W, height: H } = cv.getBoundingClientRect(), d = devicePixelRatio || 1;
+  cv.width = W * d; cv.height = H * d;
+  const ctx = cv.getContext('2d'); ctx.scale(d, d);
+  const cols = ['#FE2C55', '#25F4EE', '#121212', '#FFC93C', '#FF8FA6'];
+  const mk = init => ({ x: rnd(0, W), y: init ? -rnd(0, H * 1.2) : -20, w: rnd(6, 12), h: rnd(9, 17), vx: rnd(-.6, .6), vy: rnd(1.6, 4),
+    r: rnd(0, 6.28), vr: rnd(-.1, .1), wob: rnd(0, 6.28), c: cols[Math.floor(rnd(0, cols.length))], circ: Math.random() < .25 });
+  const ps = Array.from({ length: 150 }, () => mk(true));
+  for (let i = 0; i < 70; i++) {
+    const p = mk(), a = rnd(0, 6.28), s = rnd(4, 11);
+    Object.assign(p, { x: W / 2, y: H * .45, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 4, burst: true }); ps.push(p);
+  }
+  (function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = ps.length - 1; i >= 0; i--) {
+      const p = ps[i];
+      if (p.burst) { p.vx *= .97; p.vy = p.vy * .97 + .18; } else p.wob += .05;
+      p.x += p.vx + (p.burst ? 0 : Math.sin(p.wob) * .6); p.y += p.vy; p.r += p.vr;
+      if (p.y > H + 20) { if (p.burst) { ps.splice(i, 1); continue; } Object.assign(p, mk()); }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+      if (p.circ) { ctx.beginPath(); ctx.arc(0, 0, p.w / 2, 0, 6.28); ctx.fill(); }
+      else { ctx.scale(1, Math.cos(p.wob * 2)); ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      ctx.restore();
+    }
+    requestAnimationFrame(loop);
+  })();
+}
+</script>
+</body>
+</html>
